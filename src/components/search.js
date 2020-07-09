@@ -49,6 +49,10 @@ export default function Search() {
   },[])
   
   if(dataloading){
+    const item = globalData.Countries.map((country, idx)=>{
+      return <MenuItem value={country.Country} key={idx}>{country.Country}
+      </MenuItem>
+    })
     return (
         <div>
           <Button className={classes.button} onClick={handleOpen}>
@@ -68,7 +72,7 @@ export default function Search() {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem> {globalData.Countries[0].Country}</MenuItem>
+              {item}
             </Select>
           </FormControl>
         </div>
