@@ -7,6 +7,14 @@ import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
   button: {
     display: 'block',
     marginTop: theme.spacing(2),
@@ -19,11 +27,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Search() {
   const classes = useStyles();
-  const [age, setAge] = React.useState('');
+  const [country, setCountry] = React.useState('');
   const [open, setOpen] = React.useState(false);
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setCountry(event.target.value);
   };
 
   const handleClose = () => {
@@ -35,7 +43,7 @@ export default function Search() {
   };
   const [globalData , setGlobalData] = useState();
   const [dataloading , setDataLoading] = useState(false);
-  
+
   useEffect(() => {
       async function fetchGlobalData(){  
         const url = "https://api.covid19api.com/summary";
@@ -49,12 +57,13 @@ export default function Search() {
   },[])
   
   if(dataloading){
-    const item = globalData.Countries.map((country, idx)=>{
-      return <MenuItem value={country.Country} key={idx}>{country.Country}
+    const item = globalData.Countries.map((country ,idx)=>{
+      return <MenuItem value={country.Country}  key={idx}>{country.Country}
       </MenuItem>
+    
     })
     return (
-        <div>
+        <div className={classes.root}>
           <Button className={classes.button} onClick={handleOpen}>
             Select the Country
           </Button>
@@ -66,7 +75,7 @@ export default function Search() {
               open={open}
               onClose={handleClose}
               onOpen={handleOpen}
-              value={age}
+              value={country}
               onChange={handleChange}
             >
               <MenuItem value="">
@@ -75,7 +84,22 @@ export default function Search() {
               {item}
             </Select>
           </FormControl>
+          {/* <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <Paper className={classes.paper}><h1>Countries Data</h1></Paper>
+            </Grid>
+            <Grid item xs={4}>
+              <Paper className={classes.paper}><h3>Total Cases</h3></Paper>
+            </Grid>
+            <Grid item xs={4}>
+              <Paper className={classes.paper}><h3>Recovered</h3></Paper>
+            </Grid>
+            <Grid item xs={4}>
+              <Paper className={classes.paper}><h3>Deaths</h3></Paper>
+            </Grid>
+          </Grid> */}
         </div>
+        
       );
 }
   return (
@@ -91,7 +115,7 @@ export default function Search() {
           open={open}
           onClose={handleClose}
           onOpen={handleOpen}
-          value={age}
+          value={country}
           onChange={handleChange}
         >
           <MenuItem value="">
@@ -104,4 +128,4 @@ export default function Search() {
       </FormControl>
     </div>
   );
-}
+} ///////////////////////////////////////////////////////////////////////
