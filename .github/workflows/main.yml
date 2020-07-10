@@ -36,9 +36,9 @@ jobs:
     - name: Install Material-ui/core
       run: npm install -g @material-ui/core
     - name: Install React ChartJs
-      run: npm install --save react-chartjs-2 chart.js    
+      run: npm install -g react-chartjs-2 chart.js    
     - name: install react-number-format
-      run:  npm install react-number-format --save 
+      run:  npm install -g react-number-format 
     - name: Install Surge
       run: npm install -g surge
     - name: Deploy Surge
